@@ -57,6 +57,9 @@ func (i *image) ArtifactType() (string, error) {
 	if i.artifactType != nil {
 		return *i.artifactType, nil
 	}
+	if i.configMediaType != nil && !i.configMediaType.IsConfig() {
+		return string(*i.configMediaType), nil
+	}
 	return partial.ArtifactType(i.base)
 }
 
